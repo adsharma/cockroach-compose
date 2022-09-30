@@ -2,7 +2,7 @@ version: "3"
 services:
 
   roach1:
-    image: cockroachdb/cockroach:v19.2.4
+    image: cockroachdb/cockroach:${ROACH_VERSION}
     ports:
       # web ui
       - "127.0.0.1:8080:8080"
@@ -13,7 +13,7 @@ services:
       - insect-lab
 
   roach2:
-    image: cockroachdb/cockroach:v19.2.4
+    image: cockroachdb/cockroach:${ROACH_VERSION}
     volumes:
       - sr2-data:/cockroach/cockroach-data
     command: start --insecure --join=roach1,roach2,roach3
@@ -21,7 +21,7 @@ services:
       - insect-lab
 
   roach3:
-    image: cockroachdb/cockroach:v19.2.4
+    image: cockroachdb/cockroach:${ROACH_VERSION}
     volumes:
       - sr3-data:/cockroach/cockroach-data
     command: start --insecure --join=roach1,roach2,roach3
@@ -29,7 +29,7 @@ services:
       - insect-lab
 
   roach-runner:
-    image: cockroachdb/cockroach:v19.2.4
+    image: cockroachdb/cockroach:${ROACH_VERSION}
     restart: on-failure
     depends_on:
       - roach1
